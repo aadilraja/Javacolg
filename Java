@@ -1,0 +1,64 @@
+// Outer class
+public class Outer {
+    private static int staticVar = 10; // Static variable
+    
+    // Static nested class
+    static class StaticNested {
+        void display() {
+            System.out.println("Static Nested Class: " + staticVar);
+        }
+    }
+    
+    // Member inner class
+    class MemberInner {
+        void display() {
+            System.out.println("Member Inner Class: " + staticVar);
+        }
+    }
+    
+    // Method with local inner class
+    void methodWithLocalInner() {
+        int localVar = 20; // Local variable
+        
+        // Local inner class
+        class LocalInner {
+            void display() {
+                System.out.println("Local Inner Class: " + staticVar + ", " + localVar);
+            }
+        }
+        
+        // Creating an instance of the local inner class and calling its method
+        LocalInner localInner = new LocalInner();
+        localInner.display();
+    }
+    
+    // Method with anonymous inner class
+    void methodWithAnonymousInner() {
+        int localVar = 30; // Local variable
+        
+        // Anonymous inner class implementing an interface
+        Runnable anonymousInner = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Anonymous Inner Class: " + staticVar + ", " + localVar);
+            }
+        };
+        
+        // Calling the run method of the anonymous inner class
+        anonymousInner.run();
+    }
+    
+    // Main method
+    public static void main(String[] args) {
+        // Creating instances of each inner class and calling their methods
+        StaticNested staticNested = new StaticNested();
+        staticNested.display();
+        
+        Outer outerObject = new Outer();
+        Outer.MemberInner memberInner = outerObject.new MemberInner();
+        memberInner.display();
+        
+        outerObject.methodWithLocalInner();
+        outerObject.methodWithAnonymousInner();
+    }
+}
